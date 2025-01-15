@@ -1,16 +1,33 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
 import './App.css'
+import './tailwind.css'
+import { Bank } from './types/bank.type'
+import { AddBankModal } from './components/modals/bank/add-bank.modal'
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [totalSavings, setTotalSavings] = useState<number>(10000)
+  const [banks, setBanks] = useState<Bank[]>([])
+  const [addBankModalVisibility, setBankModalVisibility] = useState<boolean>(true)
 
   return (
     <>
-  
+      {addBankModalVisibility && (
+        <AddBankModal
+          onSubmit={() => console.log("tst")}
+          isVisble={addBankModalVisibility}
+          onClose={() => setBankModalVisibility(false)}
+        />
+      )}
+      <h1>
+        Total Savings: {parseInt(totalSavings.toFixed(2)).toLocaleString()}
+      </h1>
+      <div className="flex flex-row space-x-3">
+        <h3>Bank 1: 10,000</h3>
+        <h3>Bank 2: 4,000</h3>
+      </div>
+      <button onClick={() => setBankModalVisibility(true)}>Add Bank</button>
     </>
-  )
+  );
 }
 
 export default App
