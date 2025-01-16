@@ -4,3 +4,10 @@ export type Bank = {
   type: "SAVINGS" | "CHECKING"
   amount: number
 }
+
+export type AddBankType = {
+  id?: number;
+  name: string;
+  type: "SAVINGS" | "CHECKING" | null;
+  amount: number;
+};

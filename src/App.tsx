@@ -7,17 +7,10 @@ import { AddBankModal } from './components/modals/bank/add-bank.modal'
 function App() {
   const [totalSavings, setTotalSavings] = useState<number>(10000)
   const [banks, setBanks] = useState<Bank[]>([])
-  const [addBankModalVisibility, setBankModalVisibility] = useState<boolean>(true)
+  const [addBankModalVisibility, setBankModalVisibility] = useState<boolean>(false)
 
   return (
     <>
-      {addBankModalVisibility && (
-        <AddBankModal
-          onSubmit={() => console.log("tst")}
-          isVisble={addBankModalVisibility}
-          onClose={() => setBankModalVisibility(false)}
-        />
-      )}
       <h1>
         Total Savings: {parseInt(totalSavings.toFixed(2)).toLocaleString()}
       </h1>
@@ -26,6 +19,14 @@ function App() {
         <h3>Bank 2: 4,000</h3>
       </div>
       <button onClick={() => setBankModalVisibility(true)}>Add Bank</button>
+
+      {addBankModalVisibility && (
+        <AddBankModal
+          onSubmit={() => console.log("tst")}
+          isVisble={addBankModalVisibility}
+          onClose={() => setBankModalVisibility(false)}
+        />
+      )}
     </>
   );
 }
