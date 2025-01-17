@@ -52,7 +52,8 @@ export const AddBankModal = ({ isVisble, onSubmit, onClose }: AddBankModalProps)
     field: keyof AddBankType,
     value: string | number
   ) => {
-    setAddBankData((prevData) => ({ ...prevData, [field]: value }));
+    const parsedValue = BANK_FIELDS[field].type == 'number' ? parseFloat(value as string) : value
+    setAddBankData((prevData) => ({ ...prevData, [field]: parsedValue }));
   };
 
   const handleOnClose = () => {
@@ -61,9 +62,14 @@ export const AddBankModal = ({ isVisble, onSubmit, onClose }: AddBankModalProps)
   }
   
   const handleOnSubmit = () => {
+    console.log('submitted data',{
+      ...addBankData,
+      
+      type: !addBankData.type ? "SAVINGS" : addBankData.type,
+    });
     onSubmit({
       ...addBankData,
-      type: !addBankData.type ? "SAVINGS" : addBankData.type
+      type: !addBankData.type ? "SAVINGS" : addBankData.type,
     });
     handleOnClose();
     setAddBankData(DEFAULT_ADD_BANK_DATA);
