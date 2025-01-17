@@ -11,3 +11,5 @@ export type AddBankType = {
   type: "SAVINGS" | "CHECKING" | null;
   amount: number;
 };
+
+export type AddBankSubmitFn = (newBank: AddBankType) => void;

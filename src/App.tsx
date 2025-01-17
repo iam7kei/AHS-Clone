@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import './App.css'
 import './tailwind.css'
-import { Bank } from './types/bank.type'
+import { Bank, AddBankType } from "./types/bank.type";
 import { AddBankModal } from './components/modals/bank/add-bank.modal'
 
 function App() {
@@ -9,6 +9,13 @@ function App() {
   const [banks, setBanks] = useState<Bank[]>([])
   const [addBankModalVisibility, setBankModalVisibility] = useState<boolean>(false)
 
+  const onAddBankSubmit = (newBank: AddBankType) => {
+    const updatedBanks = [...banks];
+    updatedBanks.push(newBank as Bank);
+    setBanks(updatedBanks);
+  };
+
+  console.log(banks)
   return (
     <>
       <h1>
@@ -22,7 +29,7 @@ function App() {
 
       {addBankModalVisibility && (
         <AddBankModal
-          onSubmit={() => console.log("tst")}
+          onSubmit={onAddBankSubmit}
           isVisble={addBankModalVisibility}
           onClose={() => setBankModalVisibility(false)}
         />

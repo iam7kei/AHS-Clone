@@ -1,12 +1,12 @@
 import React, {useState} from "react";
 import { fn } from "../../../types/global.type";
 import { Modal, ModalTitle } from "../../modal";
-import { AddBankType } from "../../../types/bank.type";
+import { AddBankType, AddBankSubmitFn } from "../../../types/bank.type";
 
 interface AddBankModalProps {
-  isVisble: boolean
-  onSubmit: fn,
-  onClose: fn
+  isVisble: boolean;
+  onSubmit: AddBankSubmitFn;
+  onClose: fn;
 }
 
 type BankFieldType = {
@@ -46,7 +46,6 @@ const DEFAULT_ADD_BANK_DATA: AddBankType = {
 
 export const AddBankModal = ({ isVisble, onSubmit, onClose }: AddBankModalProps) => {
 
-  const [bankName, setBankName] = useState<string>("")
   const [addBankData, setAddBankData] = useState<AddBankType>(DEFAULT_ADD_BANK_DATA)
 
   const handleInputChange = (
@@ -62,6 +61,10 @@ export const AddBankModal = ({ isVisble, onSubmit, onClose }: AddBankModalProps)
   }
   
   const handleOnSubmit = () => {
+    onSubmit({
+      ...addBankData,
+      type: !addBankData.type ? "SAVINGS" : addBankData.type
+    });
     handleOnClose();
     setAddBankData(DEFAULT_ADD_BANK_DATA);
   };
