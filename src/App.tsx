@@ -71,7 +71,7 @@ function App() {
             {renderBanks()}
           </table>
         </div>
-        <button onClick={() => setBankModalVisibility(true)}>Add Bank</button>
+        <button className='btn btn-primary' onClick={() => setBankModalVisibility(true)}>Add Bank</button>
       </div>
       {addBankModalVisibility && (
         <AddBankModal

@@ -69,3 +69,29 @@
   font-size: 24px;
   cursor: pointer;
 }
+
+.btn {
+  border-radius: 8px;
+  border: 1px solid;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  cursor: pointer;
+}
+
+.btn-primary {
+  background-color: white;
+}
+
+.btn-primary:hover {
+  background-color: gainsboro;
+}
+
+.btn-secondary {
+  background-color: gray;
+}
+
+.btn-secondary:hover {
+  background-color: rgb(70, 70, 70);
+}
