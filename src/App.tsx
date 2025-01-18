@@ -33,7 +33,7 @@ function App() {
     return banks.map((item: Bank, index: number) => {
       
       return (
-        <tr>
+        <tr key={index}>
           <td>
             <h3>
               {item.name}
