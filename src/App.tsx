@@ -17,11 +17,34 @@ function App() {
   };
 
   const renderBanks = useCallback(() => {
-    return banks.map((item: Bank, index: number) => {
+
+    if (banks.length === 0) {
       return (
-        <h3>
-          {item.name}: {parseLocaleString(item.amount, true)}
-        </h3>
+        <tr>
+          <td colSpan={2}>
+            <div className="justify-center text-center items-center ">
+              <h3 className='font-semibold'>No banks listed.</h3>
+            </div>
+          </td>
+        </tr>
+      );
+    }
+
+    return banks.map((item: Bank, index: number) => {
+      
+      return (
+        <tr>
+          <td>
+            <h3>
+              {item.name}
+            </h3>
+          </td>
+          <td>
+            <h3>
+              {parseLocaleString(item.amount, true)}
+            </h3>
+          </td>
+        </tr>
       );
     })
     
@@ -37,14 +60,19 @@ function App() {
 
   return (
     <>
-      <h1>
-        Total Savings: {parseLocaleString(totalSavings, true)}
-      </h1>
-      <div className="flex flex-row space-x-3">
-        {renderBanks()}
+      <div className="flex flex-col space-y-10">
+        <h1>Total Savings: {parseLocaleString(totalSavings, true)}</h1>
+        <div className="flex flex-col space-x-3">
+          <table className='border border-black'>
+            <tr className='bg-gray-300'>
+              <th>Bank</th>
+              <th>Amount</th>
+            </tr>
+            {renderBanks()}
+          </table>
+        </div>
+        <button onClick={() => setBankModalVisibility(true)}>Add Bank</button>
       </div>
-      <button onClick={() => setBankModalVisibility(true)}>Add Bank</button>
-
       {addBankModalVisibility && (
         <AddBankModal
           onSubmit={onAddBankSubmit}
