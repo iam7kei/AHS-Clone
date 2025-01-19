@@ -32,10 +32,10 @@ export const Modal = ({
       <div className="modal-content flex flex-col justify-between space-y-5 w-[30%]">
         {children}
         <div className="flex flex-row space-x-3 justify-end">
-          <button className="border border-black" onClick={onSubmit}>
+          <button className="btn btn-primary" onClick={onSubmit}>
             Submit
           </button>
-          <button className="border border-black bg-gray-100" onClick={onClose}>
+          <button className="btn btn-secondary " onClick={onClose}>
             Close
           </button>
         </div>
