@@ -7,7 +7,6 @@ export const parseLocaleString = (num: number, sign: boolean | never) => {
 export const areFieldsEmpty = (obj: any) => {
 
   return Object.keys(obj).filter((item: string) => {
-    console.log(item, obj);
     return !obj[item] ? item : null;
   });
 

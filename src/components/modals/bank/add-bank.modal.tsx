@@ -66,7 +66,6 @@ export const AddBankModal = ({ isVisble, onSubmit, onClose }: AddBankModalProps)
   const handleOnSubmit = () => {
 
     const areAddBankFieldsEmpty = areFieldsEmpty(addBankData)
-    console.log(areAddBankFieldsEmpty);
     if (areAddBankFieldsEmpty.length > 0) {
       setErrorMsesage("Please fill up empty fields")
       return
