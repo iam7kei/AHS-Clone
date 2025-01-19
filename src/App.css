@@ -89,9 +89,9 @@
 }
 
 .btn-secondary {
-  background-color: gray;
+  background-color: rgb(209, 209, 209);
 }
 
 .btn-secondary:hover {
-  background-color: rgb(70, 70, 70);
+  background-color: rgb(170, 170, 170);
 }
