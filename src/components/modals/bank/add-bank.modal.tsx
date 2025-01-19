@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { fn } from "../../../types/global.type";
 import { Modal, ModalTitle } from "../../modal";
 import { AddBankType, AddBankSubmitFn } from "../../../types/bank.type";
+import { areFieldsEmpty } from "../../../utils/utils";
 
 interface AddBankModalProps {
   isVisble: boolean;
@@ -47,6 +48,7 @@ const DEFAULT_ADD_BANK_DATA: AddBankType = {
 export const AddBankModal = ({ isVisble, onSubmit, onClose }: AddBankModalProps) => {
 
   const [addBankData, setAddBankData] = useState<AddBankType>(DEFAULT_ADD_BANK_DATA)
+  const [errorMessage, setErrorMsesage] = useState<string>("")
 
   const handleInputChange = (
     field: keyof AddBankType,
@@ -62,11 +64,14 @@ export const AddBankModal = ({ isVisble, onSubmit, onClose }: AddBankModalProps)
   }
   
   const handleOnSubmit = () => {
-    console.log('submitted data',{
-      ...addBankData,
-      
-      type: !addBankData.type ? "SAVINGS" : addBankData.type,
-    });
+
+    const areAddBankFieldsEmpty = areFieldsEmpty(addBankData)
+
+    if (areAddBankFieldsEmpty) {
+      setErrorMsesage("Please fill up empty fields")
+      return
+    }
+  
     onSubmit({
       ...addBankData,
       type: !addBankData.type ? "SAVINGS" : addBankData.type,
@@ -115,11 +120,18 @@ export const AddBankModal = ({ isVisble, onSubmit, onClose }: AddBankModalProps)
  };
 
   return (
-    <Modal isVisble={isVisble} onSubmit={handleOnSubmit} onClose={handleOnClose}>
+    <Modal
+      isVisble={isVisble}
+      onSubmit={handleOnSubmit}
+      onClose={handleOnClose}
+    >
       <ModalTitle>
         <h2 className="font-bold">Add Bank</h2>
       </ModalTitle>
       <div className="modal-body w-full space-y-5">{renderBankFields()}</div>
+      <div>
+        <h4 className="text-red-500">{errorMessage}</h4>
+      </div>
     </Modal>
   );
 };
