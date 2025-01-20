@@ -3,7 +3,7 @@ import './App.css'
 import './tailwind.css'
 import { Bank, AddBankType } from "./types/bank.type";
 import { AddBankModal } from './components/modals/bank/add-bank.modal'
-import { parseLocaleString } from './utils/utils';
+import { parseLocaleString, sortBanksByAmount } from './utils/utils';
 
 function App() {
   const [totalSavings, setTotalSavings] = useState<number>(0)
@@ -13,6 +13,7 @@ function App() {
   const onAddBankSubmit = (newBank: AddBankType) => {
     const updatedBanks = [...banks];
     updatedBanks.push(newBank as Bank);
+    sortBanksByAmount(updatedBanks);
     setBanks(updatedBanks);
   };
 
