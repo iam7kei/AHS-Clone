@@ -64,15 +64,22 @@ function App() {
       <div className="flex flex-col space-y-10">
         <h1>Total Savings: {parseLocaleString(totalSavings, true)}</h1>
         <div className="flex flex-col space-x-3">
-          <table className='border border-black'>
-            <tr className='bg-gray-300'>
-              <th>Bank</th>
-              <th>Amount</th>
-            </tr>
-            {renderBanks()}
+          <table className="border border-black">
+            <thead>
+              <tr className="bg-gray-300">
+                <th>Bank</th>
+                <th>Amount</th>
+              </tr>
+            </thead>
+            <tbody>{renderBanks()}</tbody>
           </table>
         </div>
-        <button className='btn btn-primary' onClick={() => setBankModalVisibility(true)}>Add Bank</button>
+        <button
+          className="btn btn-primary"
+          onClick={() => setBankModalVisibility(true)}
+        >
+          Add Bank
+        </button>
       </div>
       {addBankModalVisibility && (
         <AddBankModal
