@@ -5,6 +5,7 @@
 - [ ] Error handling
 ## Phase 2
 - [ ] Backend (DB + REST API)
+- [ ] Connect to DB
 - [ ] Backend Services
 ## Phase 3
 - [ ] Error handling
