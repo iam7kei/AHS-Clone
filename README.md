@@ -1,8 +1,8 @@
 # Milestones 
 
 ## Phase 1
-- [ ] General Frontend tasks
-- [ ] Error handling
+- [X] General Frontend tasks
+- [X] Error handling
 ## Phase 2
 - [ ] Backend (DB + REST API)
 - [ ] Connect to DB
