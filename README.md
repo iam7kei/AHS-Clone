@@ -14,3 +14,7 @@
 - [ ] Colors
 ## Phase 4
 - [ ] Deploy to dev server
+
+## Phase 5 - RWD
+- [ ] Mobile
+- [ ] Tablet
