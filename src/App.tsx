@@ -36,14 +36,13 @@ function App() {
       return (
         <tr key={index}>
           <td>
-            <h3>
-              {item.name}
-            </h3>
+            <h3>{item.name}</h3>
           </td>
           <td>
-            <h3>
-              {parseLocaleString(item.amount, true)}
-            </h3>
+            <h3>{item.type}</h3>
+          </td>
+          <td>
+            <h3>{parseLocaleString(item.amount, true)}</h3>
           </td>
         </tr>
       );
@@ -68,6 +67,7 @@ function App() {
             <thead>
               <tr className="bg-gray-300">
                 <th>Bank</th>
+                <th>Type</th>
                 <th>Amount</th>
               </tr>
             </thead>
