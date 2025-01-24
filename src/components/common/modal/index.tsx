@@ -1,4 +1,4 @@
-import { fn } from "../../types/global.type";
+import { fn } from "@/types/global.type";
 
 interface ModalProps {
   isVisble: boolean;
@@ -8,15 +8,11 @@ interface ModalProps {
 }
 
 interface ModalTitleProps {
-  children: React.ReactNode
+  children: React.ReactNode;
 }
 
-export const ModalTitle = ({children}: ModalTitleProps) => {
-  return (
-    <div className="modal-title flex justify-start">
-      {children}
-    </div>
-  );
+export const ModalTitle = ({ children }: ModalTitleProps) => {
+  return <div className="modal-title flex justify-start">{children}</div>;
 };
 
 export const Modal = ({

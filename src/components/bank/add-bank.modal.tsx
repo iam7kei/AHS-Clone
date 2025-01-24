@@ -1,8 +1,8 @@
 import React, {useState} from "react";
-import { fn } from "../../../types/global.type";
-import { Modal, ModalTitle } from "../../modal";
-import { AddBankType, AddBankSubmitFn } from "../../../types/bank.type";
-import { areFieldsEmpty } from "../../../utils/utils";
+import { fn } from "../../types/global.type";
+import { Modal, ModalTitle } from "@/components/common/modal"
+import { AddBankType, AddBankSubmitFn } from "../../types/bank.type";
+import { areFieldsEmpty } from "../../utils/utils";
 
 interface AddBankModalProps {
   isVisble: boolean;

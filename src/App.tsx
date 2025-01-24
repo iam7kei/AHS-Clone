@@ -2,7 +2,8 @@ import { useCallback, useEffect, useState } from 'react'
 import './App.css'
 import './tailwind.css'
 import { Bank, AddBankType } from "./types/bank.type";
-import { AddBankModal } from './components/modals/bank/add-bank.modal'
+import { AddBankModal } from '@/components/bank/add-bank.modal'
+import { BankTable } from './components/bank/table';
 import { parseLocaleString, sortBanksByAmount } from './utils/utils';
 
 function App() {
@@ -63,16 +64,7 @@ function App() {
       <div className="flex flex-col space-y-10">
         <h1>Total Savings: {parseLocaleString(totalSavings, true)}</h1>
         <div className="flex flex-col space-x-3">
-          <table className="border border-black">
-            <thead>
-              <tr className="bg-gray-300">
-                <th>Bank</th>
-                <th>Type</th>
-                <th>Amount</th>
-              </tr>
-            </thead>
-            <tbody>{renderBanks()}</tbody>
-          </table>
+          <BankTable data={banks} />
         </div>
         <button
           className="btn btn-primary"
