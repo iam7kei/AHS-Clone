@@ -15,51 +15,6 @@ interface BankTableProps {
   data: Bank[]
 }
 
-/* const invoices = [
-  {
-    invoice: "INV001",
-    paymentStatus: "Paid",
-    totalAmount: "$250.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV002",
-    paymentStatus: "Pending",
-    totalAmount: "$150.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV003",
-    paymentStatus: "Unpaid",
-    totalAmount: "$350.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV004",
-    paymentStatus: "Paid",
-    totalAmount: "$450.00",
-    paymentMethod: "Credit Card",
-  },
-  {
-    invoice: "INV005",
-    paymentStatus: "Paid",
-    totalAmount: "$550.00",
-    paymentMethod: "PayPal",
-  },
-  {
-    invoice: "INV006",
-    paymentStatus: "Pending",
-    totalAmount: "$200.00",
-    paymentMethod: "Bank Transfer",
-  },
-  {
-    invoice: "INV007",
-    paymentStatus: "Unpaid",
-    totalAmount: "$300.00",
-    paymentMethod: "Credit Card",
-  },
-]; */
-
 export function BankTable({ data }: BankTableProps) {
   const calculateTotal = () => {
     return data.reduce((total, bank) => total + bank.amount, 0);
@@ -78,15 +33,19 @@ export function BankTable({ data }: BankTableProps) {
       <TableBody>
         {data.map((bank) => (
           <TableRow key={bank.id}>
-            <TableCell className="font-medium">{bank.name}</TableCell>
-            <TableCell>{bank.type}</TableCell>
-            <TableCell>{parseLocaleString(bank.amount, true)}</TableCell>
+            <TableCell className="font-medium text-left">{bank.name}</TableCell>
+            <TableCell className="text-left">{bank.type}</TableCell>
+            <TableCell className="text-right">
+              {parseLocaleString(bank.amount, true)}
+            </TableCell>
           </TableRow>
         ))}
       </TableBody>
       <TableFooter>
         <TableRow>
-          <TableCell colSpan={3}>Total</TableCell>
+          <TableCell colSpan={2} className="text-left">
+            Total
+          </TableCell>
           <TableCell className="text-right">
             {parseLocaleString(calculateTotal(), true)}
           </TableCell>
