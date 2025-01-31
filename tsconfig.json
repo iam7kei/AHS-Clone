@@ -11,7 +11,9 @@
     "incremental": true,
     "paths": {
       "@/*": ["./src/*"]
-    }
+    },
+    "module": "es2020",
+    "moduleResolution": "node"
   },
   "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx"],
   "exclude": ["node_modules"]
