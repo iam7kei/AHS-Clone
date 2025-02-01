@@ -4,8 +4,8 @@
 - [X] General Frontend tasks
 - [X] Error handling
 ## Phase 2
-- [ ] Backend (DB + REST API)
-- [ ] Connect to DB
+- [X] Backend (DB + REST API)
+- [X] Connect to DB
 - [ ] Backend Services
 ## Phase 3
 - [ ] Error handling
