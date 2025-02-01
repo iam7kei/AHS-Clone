@@ -28,12 +28,16 @@ export const Home = () => {
   };
 
   useEffect(() => {
-    let updatedTotalSavings = banks.reduce((totalSaving, currentBank) => {
+    if(result.isPending) {
+      return
+    }
+
+    let updatedTotalSavings = result.data?.data.reduce((totalSaving, currentBank) => {
       return totalSaving + currentBank.amount;
     }, 0);
 
     setTotalSavings(updatedTotalSavings);
-  }, [banks]);
+  }, [result]);
 
   return (
     <>
