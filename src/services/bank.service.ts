@@ -7,3 +7,11 @@ export const getBankList = async () => {
     console.error(e)
   }
 }
+
+export const addBank = async (requestOptions) => {
+  try {
+    return await axios.post("bank/add", requestOptions)
+  } catch (e) {
+    console.error(e)
+  }
+}

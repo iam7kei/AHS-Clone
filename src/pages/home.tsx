@@ -3,8 +3,8 @@ import { Bank, AddBankType } from "@/types/bank.type";
 import { AddBankModal } from "@/components/bank/add-bank.modal";
 import { BankTable } from "@/components/bank/table";
 import { parseLocaleString, sortBanksByAmount } from "@/utils/utils";
-import { getBankList } from "@/services/bank.service";
-import { useQuery } from "@tanstack/react-query";
+import { getBankList, addBank } from "@/services/bank.service";
+import { useQuery, useMutation } from "@tanstack/react-query";
 import { PulseLoader } from "react-spinners";
 
 const override: CSSProperties = {
@@ -15,36 +15,45 @@ const override: CSSProperties = {
 
 export const Home = () => {
   const [totalSavings, setTotalSavings] = useState<number>(0);
-  const [banks, setBanks] = useState<Bank[]>([]);
+  const [banks, setBanks] = useState<Bank[]>([])
   const [addBankModalVisibility, setBankModalVisibility] =
     useState<boolean>(false);
-  const result = useQuery({ queryKey: ["results"], queryFn: getBankList });
-  
-  const onAddBankSubmit = (newBank: AddBankType) => {
-    const updatedBanks = [...banks];
-    updatedBanks.push(newBank as Bank);
-    sortBanksByAmount(updatedBanks);
-    setBanks(updatedBanks);
+  const {data: bankData, refetch: bankDataRefetch, isPending: bankDataIsPending} = useQuery({ queryKey: ["results"], queryFn: getBankList });
+  const addBankMutation = useMutation({mutationFn: async (data: AddBankType) => {
+    return addBank(data)
+  },
+  onSuccess: () => {
+      bankDataRefetch()
+  },
+  onError: (data) => {
+      console.error("Failed", data)
+    }
+  })
+  const onAddBankSubmit = async (newBank: AddBankType) => {
+    addBankMutation.mutate(newBank)  
   };
 
   useEffect(() => {
-    if(result.isPending) {
+    if(bankDataIsPending) {
       return
     }
 
-    let updatedTotalSavings = result.data?.data.reduce((totalSaving, currentBank) => {
+    const updatedTotalSavings = bankData?.data.reduce((totalSaving: number, currentBank: Bank) => {
       return totalSaving + currentBank.amount;
     }, 0);
 
+    const sortedBanks = sortBanksByAmount(bankData?.data)
+    setBanks(sortedBanks)
+
     setTotalSavings(updatedTotalSavings);
-  }, [result]);
+  }, [bankDataIsPending, bankData?.data]);
 
   return (
     <>
       <div className="flex flex-col space-y-10">
         <h1>Total Savings: {parseLocaleString(totalSavings, true)}</h1>
         <div className="flex flex-col space-x-3">
-          {result.isPending ? (
+          {bankDataIsPending ? (
             <PulseLoader
               color={"black"}
               loading={true}
@@ -54,7 +63,7 @@ export const Home = () => {
               data-testid="loader"
             />
           ) : (
-            <BankTable data={result.data?.data} />
+            <BankTable data={banks} />
           )}
         </div>
         <button
