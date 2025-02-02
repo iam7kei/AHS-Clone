@@ -7,6 +7,8 @@
 - [X] Backend (DB + REST API)
 - [X] Connect to DB
 - [ ] Backend Services
+  - [X] Bank
+  - [ ] User  
 ## Phase 3
 - [ ] Error handling
 - [ ] Charts
