@@ -10,7 +10,7 @@
   - [X] Bank
   - [ ] User  
 ## Phase 3
-- [ ] Error handling
+- [ ] Enhance Error handling
 - [ ] Charts
 - [ ] Icons
 - [ ] Colors
