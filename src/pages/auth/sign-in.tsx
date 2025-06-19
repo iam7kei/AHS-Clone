@@ -4,11 +4,39 @@ import { Label } from "@/components/ui/label"
 import { Button, Button as div } from "@/components/ui/button"
 import { LuEye, LuEyeClosed } from "react-icons/lu";
 import { Header } from "@/components/home/header";
+import { useMutation } from "@tanstack/react-query";
+import { userLogin } from "@/api/mutation/login";
+import { useNavigate } from "react-router-dom";
+
+const DEFAULT_ERROR_MESSAGE = "Invalid login. Please try again."
 
 export const SignIn = () => {
-  const [username, setUsername] = useState<string | null>(null)
-  const [password, setPassword] = useState<string | null>(null)
+  const [username, setUsername] = useState<string>("")
+  const [password, setPassword] = useState<string>("")
   const [showPassword, setShowPassword] = useState<boolean>(false)
+  const [showError, setShowError] = useState<boolean>(false)
+  const [errorMessage, setErrorMessage] = useState<string>(DEFAULT_ERROR_MESSAGE)
+  const navigate = useNavigate()
+
+  const { mutate: loginMutate } = useMutation({
+    mutationFn: () => userLogin({ email: username, password }),
+    onSuccess: (data) => {
+      console.log("Login successful", data.user)
+      localStorage.setItem("user", JSON.stringify(data.user))
+      navigate("/", { replace: true })
+    },
+    onError: (error) => {
+      console.error(error)
+      setErrorMessage(DEFAULT_ERROR_MESSAGE)
+      setShowError(true)
+    }
+  })
+
+  const handleOnLoginClick = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    loginMutate()
+  }
+
 
   return (
     <div>
@@ -32,7 +60,10 @@ export const SignIn = () => {
                 </div>
               </span>
             </div>
-            <Button>Login</Button>
+            {showError && (
+              <p className="text-red-500 text-sm font-semibold">{errorMessage}</p>
+            )}
+            <Button onClick={(e: any) => handleOnLoginClick(e)}>Login</Button>
           </form>
         </div>
       </div>

@@ -8,14 +8,4 @@ const axios = Axios.create({
   },
 });
 
-/*
-TO BE ADDED ONCE USER AUTHENTICATION IS ADDED
-
-// set token if exists
-if (localStorage.getItem("token")) {
-  axios.defaults.headers.common[
-    "Authorization"
-  ] = `Bearer ${localStorage.getItem("token")}`;
-}
- */
 export default axios;
